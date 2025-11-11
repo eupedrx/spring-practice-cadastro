@@ -25,18 +25,18 @@ public class FirstController {
         return ResponseEntity.ok("Lista de usuários" + userService.listarUsuarios() );
 
     }
-    @GetMapping("/{id}")
+    @GetMapping("/usuarios/{id}")
     public ResponseEntity<?> listarUsuariosPorId(@PathVariable Long id) {
             return ResponseEntity.ok(userService.listarUsuariosPorId(id));
 
         }
 
-    @PostMapping("/salvar")
+    @PostMapping("/usuarios/salvar")
     public ResponseEntity<String> salvarUsuario(@RequestBody User user) {
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuário salvo com sucesso! ID: " + userService.salvarUsuario(user).getId());
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/usuarios/deletar/{id}")
     public void deletarUsuario(@PathVariable Long id) {
         userService.deletarUsuario(id);
     }
