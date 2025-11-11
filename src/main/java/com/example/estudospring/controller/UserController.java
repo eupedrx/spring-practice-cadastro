@@ -1,22 +1,19 @@
 package com.example.estudospring.controller;
 
 import com.example.estudospring.domain.User;
-import com.example.estudospring.exceptions.UsuarioNaoEncontradoException;
 import com.example.estudospring.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping// Definição do endpoint base para este controlador
-public class FirstController {
+public class UserController {
 
 
 
     private final UserService userService;
-    public FirstController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
