@@ -1,5 +1,6 @@
 package com.example.estudospring.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class Curso implements Serializable {
     @Column(name = "nome", nullable = false)
     private String nome;
     @OneToMany(mappedBy = "curso")
+    @JsonIgnore
     private List<Aluno> listaAlunos;
 
     public Curso() {
