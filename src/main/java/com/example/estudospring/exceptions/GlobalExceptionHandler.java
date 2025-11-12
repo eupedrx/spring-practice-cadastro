@@ -15,15 +15,16 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UsuarioNaoEncontradoException.class)
-    public ResponseEntity<Object> handleUsuarioNaoEncontrado (UsuarioNaoEncontradoException ex) {
+    @ExceptionHandler({UsuarioNaoEncontradoException.class, AlunoNaoEncontradoException.class, CursoNaoEncontradoException.class})
+    public ResponseEntity<Object> handleNaoEncontrado (RuntimeException ex) {
         Map<String,Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "Usuário não encontrado");
+        body.put("error", "Erro: Recurso Não Encontrado");
         body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGenerictException (UsuarioNaoEncontradoException ex) {
