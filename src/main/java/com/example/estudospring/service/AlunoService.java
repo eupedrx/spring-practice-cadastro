@@ -2,8 +2,7 @@ package com.example.estudospring.service;
 
 import com.example.estudospring.domain.Aluno;
 import com.example.estudospring.domain.Curso;
-import com.example.estudospring.domain.User;
-import com.example.estudospring.exceptions.UsuarioNaoEncontradoException;
+import com.example.estudospring.exceptions.AlunoNaoEncontradoException;
 import com.example.estudospring.repository.AlunoRepository;
 import com.example.estudospring.repository.CursoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -31,7 +30,7 @@ public class AlunoService {
     public Aluno listarAlunosPorId(Long id) {
 
         return alunoRepository.findById(id)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado com ID: " + id));
+                .orElseThrow(() -> new AlunoNaoEncontradoException("Aluno não encontrado com a matricula: " + id));
     }
 
     public Aluno salvarAluno(Aluno aluno) {
@@ -48,7 +47,7 @@ public class AlunoService {
 
     public void deletarAluno(Long id) {
         if (!alunoRepository.existsById(id)) {
-            throw new UsuarioNaoEncontradoException("Usuário não encontrado com ID: " + id);
+            throw new AlunoNaoEncontradoException("Aluno não encontrado com ID: " + id);
         }
        alunoRepository.deleteById(id);
     }

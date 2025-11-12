@@ -1,8 +1,7 @@
 package com.example.estudospring.service;
 
 import com.example.estudospring.domain.Curso;
-import com.example.estudospring.domain.User;
-import com.example.estudospring.exceptions.UsuarioNaoEncontradoException;
+import com.example.estudospring.exceptions.CursoNaoEncontradoException;
 import com.example.estudospring.repository.CursoRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class CursoService {
     public Curso listarCursoPorId(Long id) {
 
         return cursoRepository.findById(id)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Curso não encontrado com ID: " + id));
+                .orElseThrow(() -> new CursoNaoEncontradoException("Curso não encontrado com ID: " + id));
     }
 
     public Curso salvarCurso(Curso curso) {
@@ -35,7 +34,7 @@ public class CursoService {
 
     public void deletarCurso(Long id) {
         if (!cursoRepository.existsById(id)) {
-            throw new UsuarioNaoEncontradoException("Curso não encontrado com ID: " + id);
+            throw new CursoNaoEncontradoException("Curso não encontrado com ID: " + id);
         }
         cursoRepository.deleteById(id);
     }
