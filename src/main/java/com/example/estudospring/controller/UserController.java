@@ -28,11 +28,6 @@ public class UserController {
 
         }
 
-    @PostMapping("/usuarios/salvar")
-    public ResponseEntity<String> salvarUsuario(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário salvo com sucesso! ID: " + userService.salvarUsuario(user).getId());
-    }
-
     @DeleteMapping("/usuarios/deletar/{id}")
     public void deletarUsuario(@PathVariable Long id) {
         userService.deletarUsuario(id);
