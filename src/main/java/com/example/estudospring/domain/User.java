@@ -1,7 +1,9 @@
 package com.example.estudospring.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.ToString;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchConnectionDetails;
 
 
@@ -15,7 +17,19 @@ public class User {
     @Column(name = "nome", nullable = false)
     private String name;
     @Column(name = "senha", nullable = false)
+    @JsonIgnore
     private String password;
+
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
 
 
     public User() {
