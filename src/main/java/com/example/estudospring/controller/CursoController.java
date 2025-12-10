@@ -2,7 +2,6 @@ package com.example.estudospring.controller;
 
 
 import com.example.estudospring.docs.CursoControllerDoc;
-import com.example.estudospring.repository.CursoRepository;
 import com.example.estudospring.domain.Curso;
 import com.example.estudospring.service.CursoService;
 import org.springframework.http.HttpStatus;
@@ -36,6 +35,14 @@ public class CursoController implements CursoControllerDoc {
     @Override
     public ResponseEntity<String> salvarCurso(@RequestBody Curso curso) {
         return ResponseEntity.status(HttpStatus.CREATED).body("Curso salvo com sucesso! ID: " + cursoService.salvarCurso(curso).getId());
+    }
+
+
+    @PutMapping("/cursos/{id}")
+    @Override
+    public ResponseEntity<?> atualizarCurso(@PathVariable Long id, @RequestBody Curso curso) {
+        Curso cursoAtualizado = cursoService.atualizarCurso(id, curso);
+        return ResponseEntity.ok(cursoAtualizado); // 200 OK
     }
 
     @DeleteMapping("/cursos/deletar/{id}")
