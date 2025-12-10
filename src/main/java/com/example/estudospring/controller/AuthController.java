@@ -1,10 +1,13 @@
 package com.example.estudospring.controller;
 
 
+import com.example.estudospring.docs.AuthControllerDoc;
 import com.example.estudospring.domain.User;
 import com.example.estudospring.security.JwtUtil;
+import com.example.estudospring.security.SecurityConfig;
 import com.example.estudospring.service.UserService;
 import io.jsonwebtoken.Jwts;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController implements AuthControllerDoc {
 
     private final UserService userService;
 
@@ -26,12 +29,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Override
     public ResponseEntity<?> register(@RequestBody Map<String, String> request) {
         User user = userService.registerUser(request.get("name"), request.get("password"));
         return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
+    @Override
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
         Optional<User> user = userService.findByName(request.get("name"));
         if (user.isPresent() && user.get().getPassword().equals(request.get("password"))) {
