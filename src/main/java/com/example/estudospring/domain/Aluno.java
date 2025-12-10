@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 public class Aluno implements Serializable {
     @Id
-    @Column(name = "matricula", nullable = false)
+    @Column(name = "matricula", unique = true,nullable = false)
     private Long matricula;
 
     @Column(name = "nome", nullable = false)
