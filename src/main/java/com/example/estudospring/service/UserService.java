@@ -1,6 +1,7 @@
 package com.example.estudospring.service;
 
 import com.example.estudospring.domain.User;
+import com.example.estudospring.exceptions.UsuarioJaExistenteException;
 import com.example.estudospring.exceptions.UsuarioNaoEncontradoException;
 import com.example.estudospring.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,11 @@ public class UserService {
     }
 
     public User registerUser(String name, String password){
+        Optional<User> existingUser = userRepository.findByName(name);
+        if(existingUser.isPresent()){
+            throw new UsuarioJaExistenteException("Usuário com o nome '" + name + "' já existente");
+        }
+
         String cryptPassword = passwordEncoder.encode(password);
         User user = new User(name, cryptPassword);
         userRepository.save(user);
