@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
-@Tag(name = "Aluno", description = "Controlador para Aluno")
+@Tag(name = "Aluno", description = "APIs para manipulação de Aluno.")
 public interface AlunoControllerDoc {
 
     @Operation(

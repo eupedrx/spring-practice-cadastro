@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@Tag(name = "Usuário", description = "Controlador para Usuário")
+@Tag(name = "Usuário", description = "APIs para retorno/deletar Usuários.")
 public interface UserControllerDoc {
 
     @Operation(

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@Tag(name = "Autenticação", description = "APIs para registro e login de usuários")
+@Tag(name = "Autenticação", description = "APIs para registro e login de usuários.")
 public interface AuthControllerDoc {
 
     @Operation(
@@ -21,7 +21,7 @@ public interface AuthControllerDoc {
             description = "Cria um novo usuário no sistema com nome e senha"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Usuário registrado com sucesso",
+            @ApiResponse(responseCode = "201", description = "Usuário registrado com sucesso",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Dados inválidos"),
             @ApiResponse(responseCode = "409", description = "Usuário já existe")
