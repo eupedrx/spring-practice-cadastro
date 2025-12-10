@@ -2,6 +2,7 @@ package com.example.estudospring.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.ToString;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchConnectionDetails;

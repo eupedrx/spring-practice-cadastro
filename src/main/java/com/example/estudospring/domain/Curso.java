@@ -1,6 +1,7 @@
 package com.example.estudospring.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,8 +12,10 @@ import java.util.List;
 public class Curso implements Serializable {
     @Id
     @Column(name = "codigo")
+    @Schema(description = "Código do curso", example = "1")
     private Long id;
     @Column(name = "nome", nullable = false)
+    @Schema(description = "Nome do curso", example = "Sistemas de Informação")
     private String nome;
     @OneToMany(mappedBy = "curso")
     @JsonIgnore

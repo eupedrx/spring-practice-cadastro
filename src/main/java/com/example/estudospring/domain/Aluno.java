@@ -1,4 +1,5 @@
 package com.example.estudospring.domain;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -7,12 +8,14 @@ import java.io.Serializable;
 public class Aluno implements Serializable {
     @Id
     @Column(name = "matricula", unique = true,nullable = false)
+    @Schema(description = "Matrícula do aluno", example = "202501")
     private Long matricula;
-
     @Column(name = "nome", nullable = false)
+    @Schema(description = "Nome do aluno", example = "João Silva")
     private String nome;
     @ManyToOne
     @JoinColumn(name = "curso_codigo")
+    @Schema(description = "ID do curso", example = "1")
     private Curso curso;
 
 
