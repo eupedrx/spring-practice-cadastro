@@ -14,10 +14,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome",unique = true, nullable = false)
     private String name;
-    @Column(name = "senha", nullable = false)
-    @JsonIgnore
+    @Column(name = "senha",unique = true, nullable = false)
     private String password;
 
 
