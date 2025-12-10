@@ -16,8 +16,8 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({UsuarioNaoEncontradoException.class, AlunoNaoEncontradoException.class, CursoNaoEncontradoException.class})
-    public ResponseEntity<Object> handleNaoEncontrado (RuntimeException ex) {
-        Map<String,Object> body = new LinkedHashMap<>();
+    public ResponseEntity<Object> handleNaoEncontrado(RuntimeException ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.NOT_FOUND.value());
         body.put("error", "Erro: Recurso Não Encontrado");
@@ -25,15 +25,23 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UsuarioJaExistenteException.class)
+    public ResponseEntity<Object> handleUsuarioJaExistente(UsuarioJaExistenteException ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.CONFLICT.value());
+        body.put("error", "Erro: Usuário Já Existe");
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleGenerictException (UsuarioNaoEncontradoException ex) {
-        Map<String,Object> body = new LinkedHashMap<>();
+    public ResponseEntity<Object> handleGenericException(Exception ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         body.put("error", "Erro Interno do Servidor");
         body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }
