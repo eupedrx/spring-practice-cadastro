@@ -1,14 +1,19 @@
 package com.example.estudospring.docs;
 
 
+import com.example.estudospring.domain.User;
+import com.example.estudospring.dto.UpdateUserRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "Usuário", description = "APIs para retorno/deletar Usuários.")
 public interface UserControllerDoc {
@@ -37,6 +42,17 @@ public interface UserControllerDoc {
     ResponseEntity<?> listarUsuariosPorId(@Parameter(description = "ID do Usuário", required = true) Long id);
 
     @Operation(
+            summary = "Atualizar Usuário",
+            description = "Atualiza o nome de um usuário existente"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos")
+    })
+    ResponseEntity<?> atualizarUser(@Parameter(description = "ID do Usuário", required = true) Long id, @RequestBody UpdateUserRequest request);
+
+    @Operation(
             summary = "Deletar Usuário",
             description = "Remove um Usuário do sistema através do seu ID"
     )
@@ -46,5 +62,4 @@ public interface UserControllerDoc {
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     void deletarUsuario(@Parameter(description = "ID do Usuário a ser deletado", required = true) Long id);
-
 }

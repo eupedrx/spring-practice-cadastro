@@ -9,9 +9,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.PreUpdate;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "Curso", description = "APIs para manipulação de Curso.")
@@ -46,17 +48,18 @@ public interface CursoControllerDoc {
             @ApiResponse(responseCode = "400", description = "Dados inválidos"),
             @ApiResponse(responseCode = "409", description = "Curso já existente")
     })
-    ResponseEntity<String> salvarCurso(
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Dados do curso",
-            required = true,
-            content = @Content(
-                    schema = @Schema(
-                            example = "{\"codigo\": \"1\", \"nome\": \"Sistemas de Informação\"}"
-                    )
-            )
+    ResponseEntity<String> salvarCurso(@RequestBody Curso curso);
+
+    @Operation(
+            summary = "Atualizar curso",
+            description = "Atualiza completamente os dados de um curso existente"
     )
-            Curso curso);
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Curso atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Curso não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos")
+    })
+    ResponseEntity<?> atualizarCurso(@Parameter(description = "ID do Curso", required = true) Long id, @RequestBody Curso curso);
 
     @Operation(summary = "Deletar Curso", description = "Deleta o curso na sistema por ID")
     @ApiResponses({

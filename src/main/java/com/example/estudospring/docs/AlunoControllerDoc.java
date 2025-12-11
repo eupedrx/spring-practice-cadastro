@@ -9,6 +9,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "Aluno", description = "APIs para manipulação de Aluno.")
 public interface AlunoControllerDoc {
@@ -49,6 +52,17 @@ public interface AlunoControllerDoc {
     ResponseEntity<String> salvarAluno(
             @Parameter(description = "Dados do aluno a ser cadastrado", required = true) Aluno aluno
     );
+
+    @Operation(
+            summary = "Atualizar aluno",
+            description = "Atualiza completamente os dados de um aluno existente"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Curso atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Curso não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos")
+    })
+    ResponseEntity<?> atualizarAluno(@Parameter(description = "ID de Aluno", required = true) Long id, @RequestBody Aluno alunoAtualizado);
 
     @Operation(
             summary = "Deletar aluno",
