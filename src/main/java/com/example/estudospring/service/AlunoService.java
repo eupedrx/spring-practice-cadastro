@@ -3,6 +3,7 @@ package com.example.estudospring.service;
 import com.example.estudospring.domain.Aluno;
 import com.example.estudospring.domain.Curso;
 import com.example.estudospring.exceptions.AlunoNaoEncontradoException;
+import com.example.estudospring.exceptions.CursoNaoEncontradoException;
 import com.example.estudospring.repository.AlunoRepository;
 import com.example.estudospring.repository.CursoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -42,6 +43,17 @@ public class AlunoService {
             // Reassocia o curso "gerenciado" ao aluno
             aluno.setCurso(cursoExistente);
         }
+        return alunoRepository.save(aluno);
+    }
+
+    public Aluno atualizarAluno(Long matricula, Aluno alunoAtualizado) {
+        Aluno aluno = alunoRepository.findById(matricula)
+                .orElseThrow(() -> new AlunoNaoEncontradoException("Aluno não encontrado com a matricula: " + matricula));
+
+        aluno.setNome(alunoAtualizado.getNome());
+        aluno.setMatricula(alunoAtualizado.getMatricula());
+        // Atualize outros campos necessários
+
         return alunoRepository.save(aluno);
     }
 

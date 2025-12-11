@@ -1,6 +1,8 @@
 package com.example.estudospring.service;
 
+import com.example.estudospring.domain.Aluno;
 import com.example.estudospring.domain.User;
+import com.example.estudospring.exceptions.AlunoNaoEncontradoException;
 import com.example.estudospring.exceptions.UsuarioJaExistenteException;
 import com.example.estudospring.exceptions.UsuarioNaoEncontradoException;
 import com.example.estudospring.repository.UserRepository;
@@ -51,7 +53,11 @@ public class UserService {
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado com ID: " + id));
     }
 
-    public User salvarUsuario(User user) {
+    public User atualizarUser(Long id, String name) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new AlunoNaoEncontradoException("Usuário não encontrado com o ID: " + id));
+        user.setName(name);
+
         return userRepository.save(user);
     }
 

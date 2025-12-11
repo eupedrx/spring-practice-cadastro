@@ -32,6 +32,17 @@ public class CursoService {
         return cursoRepository.save(curso);
     }
 
+    public Curso atualizarCurso(Long id, Curso cursoAtualizado) {
+        Curso curso = cursoRepository.findById(id)
+                .orElseThrow(() -> new CursoNaoEncontradoException("Curso não encontrado com ID: " + id));
+
+        curso.setNome(cursoAtualizado.getNome());
+        curso.setId(cursoAtualizado.getId());
+        // Atualize outros campos necessários
+
+        return cursoRepository.save(curso);
+    }
+
     public void deletarCurso(Long id) {
         if (!cursoRepository.existsById(id)) {
             throw new CursoNaoEncontradoException("Curso não encontrado com ID: " + id);
