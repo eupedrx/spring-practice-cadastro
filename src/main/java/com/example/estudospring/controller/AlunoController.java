@@ -3,6 +3,7 @@ package com.example.estudospring.controller;
 
 import com.example.estudospring.docs.AlunoControllerDoc;
 import com.example.estudospring.domain.Aluno;
+import com.example.estudospring.domain.Curso;
 import com.example.estudospring.security.SecurityConfig;
 import com.example.estudospring.service.AlunoService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -37,6 +38,13 @@ public class AlunoController implements AlunoControllerDoc {
     @Override
     public ResponseEntity<String> salvarAluno(@RequestBody Aluno aluno) {
         return ResponseEntity.status(HttpStatus.CREATED).body("Aluno salvo com sucesso! Matricula: " + alunoService.salvarAluno(aluno).getMatricula());
+    }
+
+    @PutMapping("/alunos/{id}")
+    @Override
+    public ResponseEntity<?> atualizarAluno(@PathVariable Long id, Aluno aluno){
+        Aluno alunoAtualizado = alunoService.atualizarAluno(id, aluno);
+        return ResponseEntity.ok(alunoAtualizado);
     }
 
     @DeleteMapping("/alunos/deletar/{id}")
